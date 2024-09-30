@@ -23,7 +23,7 @@ const customizeSeries = (valueFromNameField) => {
   };
 
   return {
-    color: colors[valueFromNameField] || "#000000", // Define cor com base no valor ou usa preto como padrão
+    color: colors[valueFromNameField] || "yellow", // Define cor com base no valor ou usa preto como padrão
   };
 };
 
@@ -38,6 +38,21 @@ function App() {
         valueField="money" // Define o valor da série (dinheiro)
         type="bar" // Define o tipo de gráfico como barras
         barOverlapGroup="true" // Certifica que as séries não se sobreponham
+        label={{
+          visible: true, // Exibe o rótulo com o valor
+          backgroundColor: "transparent", // Remove o fundo do rótulo
+          font: {
+            weight: 600,
+            color: "#000",
+          },
+          format: {
+            type: "currency", // Formato de moeda
+            precision: 2, // Duas casas decimais
+          },
+          customizeText(e) {
+            return `R$ ${e.valueText}`; // Personaliza o texto do rótulo para exibir "R$"
+          },
+        }}
       />
       <SeriesTemplate
         nameField="money" // Cria uma série separada para cada ano
